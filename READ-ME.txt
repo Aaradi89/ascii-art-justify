@@ -1,0 +1,33 @@
+
+To get Boring Ascii Art
+
+Usage: go run . [STRING] [BANNER]
+
+EX: go run . something standard
+
+----------------------------------------------------------------
+To get Colored Ascii Art in the Terminal
+
+Usage: go run . [OPTION] [STRING]
+
+EX: go run . --color=<color> <letters to be colored> "something"
+Color to be used
+red, green, blue, yellow, cyan,	purple,	orange
+Or
+RGB Code
+Ex: rgb(100,200,25)
+
+Note: you cant use both --color= and --output= at the same time
+----------------------------------------------------------------
+
+To get Ascii Art in Output File
+
+Usage: go run . [OPTION] [STRING] [BANNER]
+
+EX: go run . --output=<fileName.txt> something standard
+
+OPTION: --output=
+
+note:
+File name should always end with .txt
+You cant use both --color= and --output= at the same time
