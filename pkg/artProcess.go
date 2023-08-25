@@ -24,14 +24,13 @@ import (
 // 	return result
 // }
 
-func ArtPreparation(text string, art []string) []string {
-	justify := true
+func ArtPreparation(text string, art []string,alignCheck bool) []string {
 	result := make([]string, 8)
 	for _, r := range text {
 		if r >= ' ' && r <= '~' {
 			position := ((int(r) - ' ') * 9) + 1
 			for i := 0; i < 8; i++ {
-				if r == ' ' && justify {
+				if r == ' ' && alignCheck {
 					result[i] += " "
 				} else {
 					result[i] += art[position+i]

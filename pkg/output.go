@@ -21,7 +21,7 @@ func Output(fileName string, asciiArt []string) {
 }
 
 
-func OutputT(outputFile, text string, asciiArt []string, toTxt bool) {
+func OutputT(outputFile, text string, asciiArt []string, toTxt, alignCheck bool) {
 	finalArt := make([]string, 0)
 	if IsNewLine(text) {
 		args := strings.Split(text, "\\n")
@@ -31,11 +31,11 @@ func OutputT(outputFile, text string, asciiArt []string, toTxt bool) {
 				finalArt = append(finalArt, "")
 				continue
 			}
-			addArt := ArtPreparation(arg, asciiArt)
+			addArt := ArtPreparation(arg, asciiArt,alignCheck)
 			finalArt = append(finalArt, addArt...)
 		}
 	} else if text != "" {
-		finalArt = ArtPreparation(text, asciiArt)
+		finalArt = ArtPreparation(text, asciiArt,alignCheck)
 	}
 	if toTxt {
 		Output(outputFile, finalArt)

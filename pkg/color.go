@@ -69,14 +69,13 @@ func TCreateColorCode(w, c, t string) []colorCode {
 // }
 
 // take the return from createColorcodes and the return from readArt to create a 8 arry of colored content ready to be printed
-func ColorArtPreparation(text []colorCode, art []string) []string {
-	justify := true
+func ColorArtPreparation(text []colorCode, art []string, alignCheck bool) []string {
 	result := make([]string, 8)
 	for _, r := range text {
 		if r.letter >= ' ' && r.letter <= '~' {
 			position := ((int(r.letter) - ' ') * 9) + 1
 			for i := 0; i < 8; i++ {
-				if r.letter == ' ' && justify {
+				if r.letter == ' ' && alignCheck {
 					result[i] += r.color + " "
 				} else {
 					result[i] += r.color + art[position+i]
@@ -156,7 +155,7 @@ func colorErr() {
 	os.Exit(1)
 }
 
-func ColorOutput(text, color, target string, asciiArt []string) {
+func ColorOutput(text, color, target string, asciiArt []string, alignCheck bool) {
 	finalArt := make([]string, 0)
 	if IsNewLine(text) {
 		args := strings.Split(text, "\\n")
@@ -167,12 +166,12 @@ func ColorOutput(text, color, target string, asciiArt []string) {
 				continue
 			}
 			colorArry := CreateColorCode(arg, color, target)
-			addArt := ColorArtPreparation(colorArry, asciiArt)
+			addArt := ColorArtPreparation(colorArry, asciiArt, alignCheck)
 			finalArt = append(finalArt, addArt...)
 		}
 	} else if text != "" {
 		colorArry := CreateColorCode(text, color, target)
-		finalArt = ColorArtPreparation(colorArry, asciiArt)
+		finalArt = ColorArtPreparation(colorArry, asciiArt, alignCheck)
 	}
 	PrintArt(finalArt)
 	fmt.Printf("\033[0m")
