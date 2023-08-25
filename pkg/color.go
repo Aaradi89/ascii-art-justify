@@ -50,13 +50,37 @@ func TCreateColorCode(w, c, t string) []colorCode {
 }
 
 // take the return from createColorcodes and the return from readArt to create a 8 arry of colored content ready to be printed
+// func ColorArtPreparation(text []colorCode, art []string) []string {
+// 	result := make([]string, 8)
+// 	for _, r := range text {
+// 		if r.letter >= ' ' && r.letter <= '~' {
+// 			position := ((int(r.letter) - ' ') * 9) + 1
+// 			for i := 0; i < 8; i++ {
+// 				result[i] += r.color + art[position+i]
+// 			}
+
+// 		} else {
+// 			fmt.Println("Invalid input")
+// 			Err()
+// 			os.Exit(1)
+// 		}
+// 	}
+// 	return result
+// }
+
+// take the return from createColorcodes and the return from readArt to create a 8 arry of colored content ready to be printed
 func ColorArtPreparation(text []colorCode, art []string) []string {
+	justify := true
 	result := make([]string, 8)
 	for _, r := range text {
 		if r.letter >= ' ' && r.letter <= '~' {
 			position := ((int(r.letter) - ' ') * 9) + 1
 			for i := 0; i < 8; i++ {
-				result[i] += r.color + art[position+i]
+				if r.letter == ' ' && justify {
+					result[i] += r.color + " "
+				} else {
+					result[i] += r.color + art[position+i]
+				}
 			}
 
 		} else {
