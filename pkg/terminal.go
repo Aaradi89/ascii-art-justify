@@ -38,6 +38,10 @@ func ArtSize(text string, asciiArt []string) (int, int) {
 		}
 		sizeWithSpace += len(asciiArt[artIndex])
 	}
+	if sizeWithSpace > GetTerminalWidth() {
+		fmt.Println("The text is too long for the terminal screen size")
+		os.Exit(1)
+	}
 	return sizeWithSpace, sizeWithoutSpace
 }
 
@@ -65,6 +69,9 @@ func TextAlign(Align, Text string, sizeWithSpace, sizeWithoutSpace int) string {
 		}
 		text = strings.ReplaceAll(text, " ", "      ")
 		text = spaces + text + spaces
+	case "left":
+		text = strings.ReplaceAll(text, " ", "      ")
+		return text
 	case "justify":
 		textArry := make([]string, 0)
 		reg1 := regexp.MustCompile(`(.+)(\s+)$`)
@@ -90,8 +97,35 @@ func TextAlign(Align, Text string, sizeWithSpace, sizeWithoutSpace int) string {
 			}
 		}
 	default:
-		text = strings.ReplaceAll(text, " ", "      ")
-		return text
+		Err()
 	}
 	return text
+}
+
+// func AlignFlagCheck() bool {
+// 	return strings.HasPrefix(os.Args[1], "--align=")
+// }
+
+// func AlignAndInput() (string, []string) {
+// 	flag := strings.TrimPrefix(os.Args[1], "--align=")
+// 	flag = strings.ToLower(flag)
+// 	inputArry := os.Args[2:]
+// 	return flag, inputArry
+// }
+
+func AlignFlagCheck() (bool, string, []string) {
+	if len(os.Args[1:]) < 1 {
+		Err()
+	}
+	hasAlign := strings.HasPrefix(os.Args[1], "--align=")
+	if hasAlign {
+		flag := strings.TrimPrefix(os.Args[1], "--align=")
+		flag = strings.ToLower(flag)
+		inputArry := os.Args[2:]
+		return hasAlign, flag, inputArry
+	} else {
+		var flag string
+		inputArry := os.Args[1:]
+		return hasAlign, flag, inputArry
+	}
 }

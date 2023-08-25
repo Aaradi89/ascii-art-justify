@@ -23,9 +23,9 @@ func ReadArt(filename string) []string {
 }
 
 func Err() {
-	fmt.Println("Usage: go run . [OPTION] [STRING]")
+	fmt.Println("Usage: go run . [OPTION] [STRING] [BANNER]")
 	fmt.Println()
-	fmt.Println("EX: go run . --color=<color> <letters to be colored> \"something\"")
+	fmt.Println("Example: go run . --align=right something standard")
 	os.Exit(1)
 }
 
@@ -89,13 +89,53 @@ func ArgsArry(b bool) []string {
 	return args
 }
 
-func Colorize() (bool, string, string, []string) {
+// func Colorize() (bool, string, string, []string) {
+// 	checkColorize := false
+// 	target := ""
+// 	color := ""
+// 	inputArry := []string{}
+// 	if len(os.Args[1:]) >= 2 && len(os.Args[1:]) <= 4 {
+// 		args := os.Args[1:]
+// 		if strings.HasPrefix(args[0], "--color=") {
+// 			color = strings.TrimPrefix(args[0], "--color=")
+// 			checkColorize = true
+// 			if len(args) == 4 {
+// 				target = args[1]
+// 				inputArry = append(inputArry, args[2:]...)
+// 				targetCheck(inputArry[0], target)
+// 			} else if len(args) == 3 {
+// 				asciiArtCheck := strings.ToLower(args[2])
+// 				if asciiArtCheck == "shadow" || asciiArtCheck == "standard" || asciiArtCheck == "thinkertoy" {
+// 					inputArry = append(inputArry, args[1:]...)
+// 				} else {
+// 					target = args[1]
+// 					inputArry = append(inputArry, args[2:]...)
+// 					targetCheck(inputArry[0], target)
+// 				}
+// 			} else {
+// 				inputArry = append(inputArry, args[1:]...)
+// 			}
+// 		}
+// 	} else if len(os.Args[1:]) == 1 {
+// 		if strings.HasPrefix(os.Args[1], "--color=") {
+// 			Err()
+// 		} else {
+// 			inputArry = append(inputArry, os.Args[1:]...)
+// 		}
+// 	} else {
+// 		Err()
+// 	}
+
+// 	return checkColorize, color, target, inputArry
+// }
+
+func Colorize(inputArgs []string) (bool, string, string, []string) {
 	checkColorize := false
 	target := ""
 	color := ""
 	inputArry := []string{}
-	if len(os.Args[1:]) >= 2 && len(os.Args[1:]) <= 4 {
-		args := os.Args[1:]
+	if len(inputArgs) >= 2 && len(inputArgs) <= 4 {
+		args := inputArgs
 		if strings.HasPrefix(args[0], "--color=") {
 			color = strings.TrimPrefix(args[0], "--color=")
 			checkColorize = true
@@ -115,12 +155,14 @@ func Colorize() (bool, string, string, []string) {
 			} else {
 				inputArry = append(inputArry, args[1:]...)
 			}
+		} else {
+			inputArry = inputArgs
 		}
-	} else if len(os.Args[1:]) == 1 {
-		if strings.HasPrefix(os.Args[1], "--color=") {
+	} else if len(inputArgs) == 1 {
+		if strings.HasPrefix(inputArgs[0], "--color=") {
 			Err()
 		} else {
-			inputArry = append(inputArry, os.Args[1:]...)
+			inputArry = append(inputArry, inputArgs...)
 		}
 	} else {
 		Err()
@@ -131,8 +173,8 @@ func Colorize() (bool, string, string, []string) {
 
 func targetCheck(text, target string) {
 	if !strings.Contains(text, target) {
-		fmt.Println("Text DONT contain any of the requested letters to be colored")
-		os.Exit(1)
+		fmt.Println("Check requested letters to be colored")
+		Err()
 	}
 }
 

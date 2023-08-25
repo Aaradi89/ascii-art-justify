@@ -6,17 +6,20 @@ import (
 )
 
 func main() {
-	asciiColorCheck, color, target, inputArry := pkg.Colorize()
+	alignCheck, align, inputArgs := pkg.AlignFlagCheck()
+	asciiColorCheck, color, target, inputArry := pkg.Colorize(inputArgs)
 	outputFile, fileNameChecker := pkg.OutputFile()
-	if !asciiColorCheck {
+	if !asciiColorCheck && !alignCheck {
 		inputArry = pkg.ArgsArry(fileNameChecker)
 	}
 	text, banner := pkg.Input(inputArry)
 	pkg.CheckTextInput(text)
 	asciiArt := pkg.ReadArt(banner)
 	//test justify
-	sizeWithSpace, sizeWithoutSpace := pkg.ArtSize(text, asciiArt)
-	text = pkg.TextAlign("right", text, sizeWithSpace, sizeWithoutSpace)
+	if alignCheck {
+		sizeWithSpace, sizeWithoutSpace := pkg.ArtSize(text, asciiArt)
+		text = pkg.TextAlign(align, text, sizeWithSpace, sizeWithoutSpace)
+	}
 	//fmt.Println(txt)
 	//test justify
 	if asciiColorCheck {
