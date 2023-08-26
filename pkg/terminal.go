@@ -38,10 +38,10 @@ func ArtSize(text string, asciiArt []string) (int, int) {
 		}
 		sizeWithSpace += len(asciiArt[artIndex])
 	}
-	if sizeWithSpace > GetTerminalWidth() {
-		fmt.Println("The text is too long for the terminal screen size")
-		os.Exit(1)
-	}
+	// if sizeWithSpace > GetTerminalWidth() {
+	// 	fmt.Println("The text is too long for the terminal screen size")
+	// 	os.Exit(1)
+	// }
 	return sizeWithSpace, sizeWithoutSpace
 }
 

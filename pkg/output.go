@@ -20,7 +20,7 @@ func Output(fileName string, asciiArt []string) {
 	}
 }
 
-func OutputT(outputFile, text string, asciiArt []string, toTxt, alignCheck bool) {
+func OutputT(outputFile, text, align string, asciiArt []string, toTxt, alignCheck bool) {
 	finalArt := make([]string, 0)
 	if IsNewLine(text) {
 		args := strings.Split(text, "\\n")
@@ -30,11 +30,19 @@ func OutputT(outputFile, text string, asciiArt []string, toTxt, alignCheck bool)
 				finalArt = append(finalArt, "")
 				continue
 			}
+			if alignCheck {
+				sizeWithSpace, sizeWithoutSpace := ArtSize(arg, asciiArt)
+				arg = TextAlign(align, arg, sizeWithSpace, sizeWithoutSpace)
+			}
 			addArt := ArtPreparation(arg, asciiArt, alignCheck)
 			fmt.Println(alignCheck)
 			finalArt = append(finalArt, addArt...)
 		}
 	} else if text != "" {
+		if alignCheck {
+			sizeWithSpace, sizeWithoutSpace := ArtSize(text, asciiArt)
+			text = TextAlign(align, text, sizeWithSpace, sizeWithoutSpace)
+		}
 		finalArt = ArtPreparation(text, asciiArt, alignCheck)
 	}
 	if toTxt {
