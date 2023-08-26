@@ -25,7 +25,7 @@ func main() {
 	//test justify
 	if asciiColorCheck {
 		color = pkg.ColorCodeCheck(color)
-		pkg.ColorOutput(text, color, target, asciiArt, alignCheck)
+		pkg.ColorOutput(text, color, target, align, asciiArt, alignCheck)
 	} else {
 		pkg.OutputT(outputFile, text, align, asciiArt, fileNameChecker, alignCheck)
 	}

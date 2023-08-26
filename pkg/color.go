@@ -155,7 +155,7 @@ func colorErr() {
 	os.Exit(1)
 }
 
-func ColorOutput(text, color, target string, asciiArt []string, alignCheck bool) {
+func ColorOutput(text, color, target,align string, asciiArt []string, alignCheck bool) {
 	finalArt := make([]string, 0)
 	if IsNewLine(text) {
 		args := strings.Split(text, "\\n")
@@ -165,11 +165,19 @@ func ColorOutput(text, color, target string, asciiArt []string, alignCheck bool)
 				finalArt = append(finalArt, "")
 				continue
 			}
+			if alignCheck {
+				sizeWithSpace, sizeWithoutSpace := ArtSize(arg, asciiArt)
+				arg = TextAlign(align, arg, sizeWithSpace, sizeWithoutSpace)
+			}
 			colorArry := CreateColorCode(arg, color, target)
 			addArt := ColorArtPreparation(colorArry, asciiArt, alignCheck)
 			finalArt = append(finalArt, addArt...)
 		}
 	} else if text != "" {
+		if alignCheck {
+			sizeWithSpace, sizeWithoutSpace := ArtSize(text, asciiArt)
+			text = TextAlign(align, text, sizeWithSpace, sizeWithoutSpace)
+		}
 		colorArry := CreateColorCode(text, color, target)
 		finalArt = ColorArtPreparation(colorArry, asciiArt, alignCheck)
 	}
