@@ -80,6 +80,9 @@ func TextAlign(Align, Text string, sizeWithSpace, sizeWithoutSpace int) string {
 		text = reg2.ReplaceAllString(text, "$2")
 		fmt.Println(text)
 		textArry0 := strings.Split(text, " ")
+		if len(textArry0) == 1 {
+			return text
+		}
 		for _, ele := range textArry0 {
 			if ele != "" {
 				textArry = append(textArry, ele)

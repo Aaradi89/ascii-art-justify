@@ -28,7 +28,7 @@ func main() {
 	} else {
 		pkg.OutputT(outputFile, text, asciiArt, fileNameChecker,alignCheck)
 	}
-	lenth(179)
+	lenth(167)
 }
 
 func lenth(n int) {
