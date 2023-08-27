@@ -79,9 +79,6 @@ func TextAlign(Align, Text string, sizeWithSpace, sizeWithoutSpace int) string {
 		reg2 := regexp.MustCompile(`^(\s+)(.+)`)
 		text = reg2.ReplaceAllString(text, "$2")
 		textArry0 := strings.Split(text, " ")
-		// if len(textArry0) <= 1 {
-		// 	return text
-		// }
 		for _, ele := range textArry0 {
 			if ele != "" {
 				textArry = append(textArry, ele)
@@ -90,7 +87,6 @@ func TextAlign(Align, Text string, sizeWithSpace, sizeWithoutSpace int) string {
 		if len(textArry) <= 1 {
 			return text
 		}
-		fmt.Printf("justifyAlignCols : %v\n len(textArry) : %v\n", justifyAlignCols,len(textArry0))
 		justifyAlignCols /= (len(textArry) - 1)
 		for i := 0; i < justifyAlignCols; i++ {
 			spaces += " "
@@ -108,16 +104,6 @@ func TextAlign(Align, Text string, sizeWithSpace, sizeWithoutSpace int) string {
 	return text
 }
 
-// func AlignFlagCheck() bool {
-// 	return strings.HasPrefix(os.Args[1], "--align=")
-// }
-
-// func AlignAndInput() (string, []string) {
-// 	flag := strings.TrimPrefix(os.Args[1], "--align=")
-// 	flag = strings.ToLower(flag)
-// 	inputArry := os.Args[2:]
-// 	return flag, inputArry
-// }
 
 func AlignFlagCheck() (bool, string, []string) {
 	if len(os.Args[1:]) < 1 {
