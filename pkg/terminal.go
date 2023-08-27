@@ -78,7 +78,6 @@ func TextAlign(Align, Text string, sizeWithSpace, sizeWithoutSpace int) string {
 		text = reg1.ReplaceAllString(text, "$1")
 		reg2 := regexp.MustCompile(`^(\s+)(.+)`)
 		text = reg2.ReplaceAllString(text, "$2")
-		//fmt.Println(text)
 		textArry0 := strings.Split(text, " ")
 		// if len(textArry0) <= 1 {
 		// 	return text
