@@ -80,13 +80,16 @@ func TextAlign(Align, Text string, sizeWithSpace, sizeWithoutSpace int) string {
 		text = reg2.ReplaceAllString(text, "$2")
 		//fmt.Println(text)
 		textArry0 := strings.Split(text, " ")
-		if len(textArry0) <= 1 ||len(textArry) <= 1{
-			return text
-		}
+		// if len(textArry0) <= 1 {
+		// 	return text
+		// }
 		for _, ele := range textArry0 {
 			if ele != "" {
 				textArry = append(textArry, ele)
 			}
+		}
+		if len(textArry) <= 1 {
+			return text
 		}
 		fmt.Printf("justifyAlignCols : %v\n len(textArry) : %v\n", justifyAlignCols,len(textArry0))
 		justifyAlignCols /= (len(textArry) - 1)
