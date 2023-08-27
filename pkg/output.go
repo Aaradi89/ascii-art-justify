@@ -35,7 +35,7 @@ func OutputT(outputFile, text, align string, asciiArt []string, toTxt, alignChec
 				arg = TextAlign(align, arg, sizeWithSpace, sizeWithoutSpace)
 			}
 			addArt := ArtPreparation(arg, asciiArt, alignCheck)
-			fmt.Println(alignCheck)
+			//fmt.Println(alignCheck)
 			finalArt = append(finalArt, addArt...)
 		}
 	} else if text != "" {

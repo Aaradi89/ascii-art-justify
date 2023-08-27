@@ -52,8 +52,8 @@ func TextAlign(Align, Text string, sizeWithSpace, sizeWithoutSpace int) string {
 	rightAlignCols := terminalWidth - sizeWithSpace
 	centerAlignCols := (terminalWidth - sizeWithSpace) / 2
 	justifyAlignCols := terminalWidth - sizeWithoutSpace
-	fmt.Printf("term : %v; right : %v; center : %v \n", terminalWidth, rightAlignCols, centerAlignCols)
-	fmt.Printf("with space : %v; without space : %v\n", sizeWithSpace, sizeWithoutSpace)
+	// fmt.Printf("term : %v; right : %v; center : %v \n", terminalWidth, rightAlignCols, centerAlignCols)
+	// fmt.Printf("with space : %v; without space : %v\n", sizeWithSpace, sizeWithoutSpace)
 	spaces := ""
 
 	switch align {
@@ -78,9 +78,9 @@ func TextAlign(Align, Text string, sizeWithSpace, sizeWithoutSpace int) string {
 		text = reg1.ReplaceAllString(text, "$1")
 		reg2 := regexp.MustCompile(`^(\s+)(.+)`)
 		text = reg2.ReplaceAllString(text, "$2")
-		fmt.Println(text)
+		//fmt.Println(text)
 		textArry0 := strings.Split(text, " ")
-		if len(textArry0) == 1 {
+		if len(textArry0) <= 1 ||len(textArry) <= 1{
 			return text
 		}
 		for _, ele := range textArry0 {
@@ -88,6 +88,7 @@ func TextAlign(Align, Text string, sizeWithSpace, sizeWithoutSpace int) string {
 				textArry = append(textArry, ele)
 			}
 		}
+		fmt.Printf("justifyAlignCols : %v\n len(textArry) : %v\n", justifyAlignCols,len(textArry0))
 		justifyAlignCols /= (len(textArry) - 1)
 		for i := 0; i < justifyAlignCols; i++ {
 			spaces += " "

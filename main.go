@@ -2,7 +2,7 @@ package main
 
 import (
 	"ascii-art/pkg"
-	"fmt"
+	//"fmt"
 )
 
 func main() {
@@ -29,11 +29,12 @@ func main() {
 	} else {
 		pkg.OutputT(outputFile, text, align, asciiArt, fileNameChecker, alignCheck)
 	}
-	lenth(167)
+	//lenth(167)
 }
 
-func lenth(n int) {
-	for i := 0; i < n; i++ {
-		fmt.Printf("-")
-	}
-}
+// func lenth(n int) {
+// 	for i := 0; i < n; i++ {
+// 		fmt.Printf("-")
+// 	}
+//  fmt.Println()
+// }
